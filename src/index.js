@@ -1,6 +1,18 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+const Statistic = (props) => {
+  return (
+    <p>{props.text}{props.result}</p>
+  )
+}
+
+const Button = (props) => {
+  return (
+    <button onClick={() => props.valueset(props.value + 1)}>{props.text}</button>
+  )
+}
+
 const Statistics = (props) => {
   if(props.total===0) {
     return(<div><h1>statistics</h1></div>)
@@ -8,12 +20,12 @@ const Statistics = (props) => {
   return (
     <div>
       <h1>statistics</h1>
-      <p>good {props.good}</p>
-      <p>neutral {props.neutral}</p>
-      <p>bad {props.bad}</p>
-      <p>all {props.total}</p>
-      <p>average {(props.good - props.bad) / (props.total)}</p>
-      <p>percentage {(100 * props.good) / (props.total)}%</p>
+      <Statistic result={props.good} text={"good "}/>
+      <Statistic result={props.neutral} text={"neutral "}/>
+      <Statistic result={props.bad} text={"bad "}/>
+      <Statistic result={props.total} text={"total "}/>
+      <Statistic result={(props.good - props.bad) / (props.total)} text={"average "}/>
+      <Statistic result={(100 * props.good) / (props.total)} text={"percentage "}/>
     </div>
   )
 }
@@ -28,13 +40,25 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
-      <button onClick={() => setGood(good + 1)}>good</button><button onClick={() => setNeutral(neutral + 1)}>neutral</button><button onClick={() => setBad(bad + 1)}>bad</button>
+      <Button value={good} valueset={setGood} text={"good"}/><Button value={neutral} valueset={setNeutral} text={"neutral"}/><Button value={bad} valueset={setBad} text={"bad"}/>
       <Statistics good={good} neutral={neutral} bad={bad} total={good + neutral + bad}/>
     </div>
   )
 }
 
 /*
+
+
+<h1>statistics</h1>
+      <p>good {props.good}</p>
+      <p>neutral {props.neutral}</p>
+      <p>bad {props.bad}</p>
+      <p>all {props.total}</p>
+      <p>average {(props.good - props.bad) / (props.total)}</p>
+      <p>percentage {(100 * props.good) / (props.total)}%</p>
+
+
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 
