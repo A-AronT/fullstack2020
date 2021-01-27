@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const Statistics = (props) => {
+  if(props.total===0) {
+    return(<div><h1>statistics</h1></div>)
+  }
   return (
     <div>
       <h1>statistics</h1>
